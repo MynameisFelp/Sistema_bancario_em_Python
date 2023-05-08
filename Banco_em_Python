@@ -1,0 +1,69 @@
+Saldo = 0
+Saldo = 0
+Limite = 500
+Extrato = ""
+Numero_Saques = 0
+LIMITES_SAQUES = 3
+
+while True:
+    print("===================================")
+    print("=========== BANCO PYTHON ===========")
+    print("===================================")
+    print("Selecione uma opção:")
+    print("1. Depósito")
+    print("2. Saque")
+    print("3. Extrato")
+    print("4. Saldo")
+    print("5. Sair")
+    print("===================================")
+
+    op = input("Opção selecionada: ")
+
+    if op == "1":
+        print("\n=== Depósito ===")
+        valor = float(input("Informe o valor do depósito: "))
+        if valor > 0:
+            Saldo += valor
+            Extrato += f"Depósito: +{valor:.2f}\n"
+            print(f"\nDepósito de R${valor:.2f} realizado com sucesso.")
+        else:
+            print("\nDepósito inválido.")
+
+    elif op == "2":
+        print("\n=== Saque ===")
+        saque = float(input("Informe o valor do saque: "))
+
+        if saque <= Limite and Numero_Saques != LIMITES_SAQUES:
+            if Saldo >= saque:
+                Saldo -= saque
+                Numero_Saques += 1
+                Extrato += f"Saque: -{saque:.2f}\n"
+                print(f"\nSaque de R${saque:.2f} realizado com sucesso.")
+            else:
+                print("\nSaldo insuficiente para realizar o saque.")
+        elif saque > Limite:
+            print("\nVocê excedeu o limite de saque disponível.")
+        elif Numero_Saques == LIMITES_SAQUES:
+            print("\nVocê atingiu o número máximo de saques diários.")
+
+    elif op == "3":
+        print("\n=== Extrato ===")
+        print("Extrato:")
+        print(Extrato)
+
+    elif op == "4":
+        print("\n=== Saldo ===")
+        if Saldo == 0:
+            print("Ainda não há saldo disponível. Faça um depósito primeiro.")
+        else:
+            print(f"Saldo disponível: R${Saldo:.2f}")
+
+    elif op == "5":
+        print("\nSaindo...")
+        break
+
+    else:
+        print("\nOpção inválida. Por favor, escolha uma opção válida.")
+
+    input("\nPressione Enter para continuar...")
+    print("\n" * 5)  # Adiciona linhas em branco para separar as informações visualmente
